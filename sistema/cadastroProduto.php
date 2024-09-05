@@ -18,27 +18,33 @@
       <div class="row">
         <div class="col-12">
           
-          <form method="post" action="acao/acaoCliente.php" >
-            <div class="form-row">
-              <div class="col-md-4 mb-3">
-                <label for="validationCustom01">Nome do Cliente</label>
-                <input type="text" name="nome" class="form-control" id="validationCustom01" placeholder="Digite o nome do cliente" value="" >
-              
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="validationCustom02">CNPJ</label>
-                <input type="number" name="cnpj" class="form-control" id="validationCustom02" placeholder="Informe o CNPJ" value="" >
-              
-              </div>
-              
-            <button class="btn btn-primary" value="Enviar" name="enviar" type="submit">Enviar</button>
-          </form>
-                      </div>
-                      <div class="row">
-                      <div class="col-12">
-                          <?php require_once 'includes/rodape.php'; ?>
-                      </div>
-                  </div>
+        <form>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Nome do produto</label>
+            <input type="text"  nome="produto" class="form-control" id="" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Categoria do Produto</label>
+            <input type="text" name="categoria" class="form-control" id="" placeholder="">
+        </div>        
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Anexe um Produto</label>
+            <input type="file"  name="arquivo"class="form-control-file" id="">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Mensagem:</label>
+            <textarea class="form-control" name="mensagem" id="" rows="3"></textarea>
+        </div>
+
+        <button class="btn btn-primary" value="Enviar" name="enviar" type="submit">Enviar</button>
+    </form>
+     
+    </div>
+    <div class="row">
+    <div class="col-12">
+        <?php require_once 'includes/rodape.php'; ?>
+    </div>
+</div>
       </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

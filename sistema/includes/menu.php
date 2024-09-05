@@ -13,7 +13,7 @@
         <a class="nav-link" href="#">cadastro Fornecedor</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Cadastro produto</a>
+        <a class="nav-link" href="cadastroProduto.php">Cadastro produto</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
