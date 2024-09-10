@@ -20,10 +20,10 @@
           Cadastros
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">País</a>
+          <a class="dropdown-item" href="cadastroPais.php">País</a>
           <a class="dropdown-item" href="#">Estado</a>
           <a class="dropdown-item" href="#">Cidade</a>
-          <a class="dropdown-item" href="#">Envio de E-mail</a>
+          <a class="dropdown-item" href="envioEmail.php">Envio de E-mail</a>
         </div>
       </li>
       <li class="nav-item">
