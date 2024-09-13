@@ -128,4 +128,79 @@ class Cliente {
            echo $ex;
        }
    }
+   public function selecionaId($dados){
+    try{
+        $this->id = $this->objfn->base64($dado, 2);
+        $cst = $this->con->conectar()->prepare(
+            "SELECT id, nome, estado, mensagem FROM 
+            clientes WHERE id = :idCliente ");
+        
+        $cst->execute();
+        return $cst->fetch();
+    }
+    catch(pdoexception $ex){
+        echo $ex;
+    }
+   }
+
+public function editarCliente($dados)
+{
+    try{
+        $this->id = $this->objfn->base64($dados['func'],2);
+        $this->nome = $dados['nome'];
+        $this->estado = $dados['estado'];
+        $this->mensagem = $dados['mensagem'];
+
+        $cst = $this->con->conectar()->prepare("UPDATE 
+        clientes SET nome = :nome, estado = :estado, mensagem = :mensagem
+        WHERE id = :idCliente");
+        $cst->binParam(":idCliente", $this->id, PDO::PARAM_INT);
+        $cst->binParam(":nome", $this->nome, PDO::STR);
+        $cst->binParam(":estado", $this->estado, PDO::STR);
+        $cst->binParam(":mensagem", $this->mensagem, PDO::STR);
+
+        if($cst->execute())
+        {
+            return "ok";
+        }else{
+            echo "Não editou";
+        }
+    }catch(PDOException $ex)
+    {
+        echo $ex;
+    }
+}
+public function deletarId($dado)
+{
+    try{
+        $this->id = $this->objfn->base64($dado, 2);
+        $cst = $this->con->conectar()->prepare("DELETE FROM clientes
+        WHERE id= :idCliente");
+        $cst->bindParam(":idCliente" , $this->id, PDO::PARAM_INT);
+            if($cst->execute()){
+                return "ok";
+            }else{
+                echo "Não deletou";
+            }
+    }catch(PDOException $ex){
+        echo $ex;
+    }
+}
+public function querySelecionaFiltro($filtro){
+    try{
+        $cst = $this->con->conectar()->prepare("
+        SELECT i.id, i.nome, i.mensagem, e.estado
+        FROM clientes i
+        JOIN estado e ON e.id = i.estado
+        WHERE i,nome LIKE :filtro");
+
+        $filtro = "%$filtro%";
+        $cst->bindParam(':filtro', $filtro, PDO::PARAM_STR);
+
+        return $cst->fetchAll();
+    }
+catch(PDOException $ex){
+    echo $ex->getMessage();
+}
 }   
+}
