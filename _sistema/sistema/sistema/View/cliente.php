@@ -1,5 +1,27 @@
+<?php
+require "../../vendor/autoload.php";
 
+$cliente = new Cliente();
+$objfn = new Funcoes();
 
+if(isset($_GET['acao']))
+{
+    switch($_GET['acao'])
+    {
+        case "edit": $func = $cliente->selecionaId($_GET['func']);
+        break;
+        case "delet":
+            if($cliente->deletarId($_GET['func']) == "ok")
+            {
+                echo "Deletado com sucesso";
+                header("Location:cliente.php");
+            }else{
+                echo "Não deletou"
+            }
+            break;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -38,7 +60,32 @@
                 </tr>
             </thead>
             <tbody>
-            
+            <?php
+            if(isset($_POST['btnfiltro']))
+            {
+                $filtro = $_POST['filtro'];
+                $contagem = 1;
+                $resultados = $cliente->querySelecionarFiltro($filtro);
+
+            }else{
+                $contagem = 1;
+                $resultados = $cliente->selecionarCliente();
+            }
+            foreach($resultado as $ytaa)
+            {
+
+             ?>
+             <tr>
+                <th scope="row"><?php echo $contagem++; ?></th>
+                <td><?php echo $ytaa['nome']; ?></td>
+                <td><?php echo $ytaa['estado']; ?></td>
+                <td><?php echo $ytaa['mensagem']; ?></td>
+                <td><a class= "btn btn-warning" href="../acao/formcliente.php?
+                acao=edit&func=<?php $objfn->base64($ytaa["id"], 1)?>">Editar</a></td>
+                <td><a class= "btn btn-warning" href="?acao=delete&func=
+                <?php $objfn->base64($ytaa["id"], 1)?>">Deletar</a></td>
+            </tr>
+            <?php } ?>
             </tbody>
          </table>
     
