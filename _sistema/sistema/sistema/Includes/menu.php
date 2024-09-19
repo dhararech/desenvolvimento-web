@@ -3,13 +3,10 @@
     <a class="nav-link active" href="index.php">Home</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="cliente.php">Cadastro Cliente</a>
+    <a class="nav-link" href="cliente.php">Cliente</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Cadastro Fornecedor</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Cadastro Produto</a>
+    <a class="nav-link" href="produto.php">Produto</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="usuario.php">Cadastro Usuário</a>

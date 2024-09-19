@@ -8,7 +8,8 @@
         private $servidor;
         private static $pdo;
 
-       
+    
+
 
         public function __construct (){
             $this->usuario = "root";
@@ -18,10 +19,10 @@
 
         }
 
-       
+        
 
         public function conectar(){
-           
+             
             try{
 
                 if(is_null(self:: $pdo) ){
@@ -31,7 +32,7 @@
  
             }catch(PDOExecption $ex){
                     echo $ex;
-                   
+                    
             }
         }
 

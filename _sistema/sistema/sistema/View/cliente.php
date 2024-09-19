@@ -63,7 +63,8 @@
             </thead>
             <tbody>
             <?php
-            if (isset($_POST["btnfiltro"])) {
+           
+                if (isset($_POST["btnfiltro"])) {
                     $filtro = $_POST['filtro'];
                     $contagem = 1;
                     $resultados = $cliente->querySelecionaFiltro($filtro);
@@ -79,10 +80,8 @@
                     <td><?php echo $ytaa['nome'];  ?></td>
                     <td><?php echo $ytaa['estado'];  ?></td>
                     <td><?php echo $ytaa['mensagem'];  ?></td>
-                    <td><a class="btn btn-warning" href="../acao/formcliente.php?acao=edit&func=
-                    <?= $objfn->base64($ytaa["id"], 1) ?>">Editar</a></td>
-                    <td><a class="btn btn-danger" href="?acao=delet&func=
-                    <?= $objfn->base64($ytaa["id"], 1) ?>">Deletar</a>
+                    <td><a class="btn btn-warning" href="../acao/formcliente.php?acao=edit&func=<?= $objfn->base64($ytaa["id"], 1) ?>">Editar</a></td>
+                    <td><a class="btn btn-danger" href="?acao=delet&func=<?= $objfn->base64($ytaa["id"], 1) ?>">Deletar</a>
                 </tr>
         <?php } ?>
             </tbody>

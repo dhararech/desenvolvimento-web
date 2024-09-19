@@ -5,22 +5,6 @@
     $objfn = new Funcoes();
 
     //Saber qual é a ação Editar e Deletar
-    if(isset($_GET['acao'])){
-
-        switch($_GET['acao']){
-
-           case "edit":  $func = $usuario->selecionaId($_GET['func']);
-             break;
-           case "delet": 
-               if( $usuario->deletarId($_GET['func']) == "ok"){
-                   echo "Deletado com Sucesso";
-                   header("Location:usuario.php");
-               } else{
-                 echo "Não Deletou";
-               }
-             break;
-        } 
-     }
     
 
 ?>
@@ -51,7 +35,6 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
                             <th scope="col">Senha</th>
-                            <th scope="col">Tipo</th>
                             <th scope="col">Observação</th>
                             <th scope="col">Editar</th>
                             <th scope="col">Deletar</th>
@@ -59,22 +42,7 @@
                         </thead>
                         <tbody>
                         <?php
-                        $paginaAtual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-                        $paginaAtual = empty($paginaAtual) ? 1 : $paginaAtual;
-
-                        echo "Debug: Página Atual antes de obterUsuariosPaginados: $paginaAtual<br>";
-
-
-                        try {
-                            $totalUsuarios = $usuario->contarTotalUsuarios();
-                            $totalPaginas = ceil($totalUsuarios / Usuario::REGISTROS_POR_PAGINA);
-
-                            echo "Debug: Total de usuários no banco: " . $totalUsuarios . "<br>";
-                            echo "Debug: Total de páginas: " . $totalPaginas . "<br>";
-
-                            $usuario = $usuario->obterUsuariosPaginados($paginaAtual);
-
-                            echo "Debug: Total de usuários na página: " . count($usuario) . "<br>";
+                        
                         ?>
 
                     <?php foreach ($usuario as $resultado): ?>
@@ -83,7 +51,6 @@
                             <td><?php echo $resultado['nome']; ?></td>
                             <td><?php echo $resultado['email']; ?></td>
                             <td><?php echo $resultado['senha']; ?></td>
-                            <td><?php echo $resultado['nivel']; ?></td>
                             <td><?php echo $resultado['mensagem']; ?></td>
                             <td><a class="btn btn-info" href="../acao/formusuario.php?acao=edit&func=<?= $objfn->base64($resultado["id"], 1) ?>">Editar</a></td>
                             <td><a class="btn btn-danger" href="?acao=delet&func=<?= $objfn->base64($resultado["id"], 1) ?>">Deletar</a></td>
@@ -117,9 +84,7 @@
             </tr>
 
             <?php
-            } catch (Exception $e) {
-                echo 'Erro ao obter usuários paginados: ' . $e->getMessage();
-            }
+            //fecha cacth
             ?>
 
                         </tbody>

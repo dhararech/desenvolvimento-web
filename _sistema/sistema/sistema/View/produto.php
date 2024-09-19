@@ -23,7 +23,47 @@
         $objfn = new Funcoes();
 
 
-   ?>
+            //Cadastrar
+    if(isset($_POST["btCadastrar"]))
+    {
+        if($produto->inserirProduto($_POST) == "ok")
+        {
+            header("Location:produto.php");
+        }
+        else
+        {
+            echo "Não foi Possível";
+        }
+    }
+
+    //Editar
+    if (isset($_POST["btAlterar"])) {
+        if ($produto->queryUpdate($_POST) == "ok") {
+            header("Location: ?acao=edit?func" . $objfn->base64($_POST["func"], 1));
+            header("Location:produto.php");
+        } else {
+            echo "erro ao alterar";
+        }
+    }
+
+    //Deletar
+    if (isset($_GET["acao"])) {
+        switch ($_GET["acao"]) {
+            case "edit" :
+                $func = $produto->querySelecionaid($_GET["func"]);
+                break;
+            case "delet" :
+                if ($produto->queryDelete($_GET["func"]) == "ok") {
+                    header('Location:produto.php');
+                } else {
+                    echo "erro ao deletar";
+                }
+                break;
+        }
+    }
+
+
+  ?>
 
   <div class="container">
   <?php require_once "../includes/menu.php"; ?>
@@ -35,7 +75,7 @@
       <label for="exampleFormControlInput1">Nome do Produto</label>
       <input type="text" name="nome" value="<?=(isset($func["nome"]) ?  ($func["nome"]) : ("") )   ?>" class="form-control" id="exampleFormControlInput1" placeholder="Produto">
   </div>
-
+ 
 
   <div class="form-group">
       <label for="exampleFormControlFile1">Envio de Arquivos</label>

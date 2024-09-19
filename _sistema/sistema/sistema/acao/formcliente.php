@@ -1,3 +1,54 @@
+<?php
+
+    require "../../vendor/autoload.php";
+    $cliente = new Cliente();
+    $objfn = new Funcoes();
+
+    //Cadastrar
+    if(isset($_POST['btCadastrar'])){
+            
+        if($cliente->inserirCliente($_POST) == "ok" ){
+            echo "inserido com suceso";
+            header("Location: ../View/cliente.php");
+        }else{
+            echo "Não deu";
+        }
+    }
+
+    //Editar
+    if(isset($_POST['btAlterar'])){
+        
+        if($cliente->editarCliente($_POST) == "ok" ){
+            echo "Editado com Sucesso";
+            header("Location: ../View/cliente.php");
+        }else{
+            echo "Não deu";
+        }
+    }
+
+    //Saber qual é a ação Editar e Deletar
+    if(isset($_GET['acao'])){
+
+        switch($_GET['acao']){
+            case "edit" : 
+                    $func = $cliente->selecionaId($_GET['func']);
+                break;
+            case "delet" : 
+                if($cliente->deletarId($_GET['func']) == "ok"){
+                    echo "Deletado com Sucesso";
+                    header("Location:../cliente.php");
+                }else{
+                    echo "Não Deletou";
+                }
+                
+                break;
+        }
+
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -29,9 +80,15 @@
             <label for="exampleFormControlSelect1">Estado</label>
             <select class="form-control"  name="estado" id="estado">
                         <?php
-                        
-                        ?>
-      </select>
+                        foreach ($cliente->selecionarEstado() as $rst){
+                            if ($rst["id"] == $func["estado"] ):
+                                ?>
+                                <option value='<?php echo $rst["id"]; ?>' selected> <?php echo $rst["estado"]; ?></option>;
+                            <?php else:
+                                ?>
+                                <option value='<?php echo $rst["id"]; ?>'><?php echo $rst["estado"]; ?></option>;
+                            <?php endif; }?>
+            </select>
         </div>
 
             <div class="form-group">
@@ -40,8 +97,15 @@
             </div>
 
             <input type="submit" class="btn btn-primary"
-                name="   <?php ?>">
-            <input type="hidden" name="func" value="<?php ?>">
+                name=" <?= (isset($_GET["acao"]) == "edit" ?
+                    ("btAlterar") : ("btCadastrar" ) )
+                    ?>" value="<?= (isset($_GET["acao"]) == "edit" ? ("Alterar")
+                    : ("Cadastrar") )
+            ?>">
+            <input type="hidden" name="func" value="<?=
+                    (isset($func["id"]) ? $objfn->base64($func["id"],
+                    1) : " " )
+            ?>">
         </form>
 
         
