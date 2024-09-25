@@ -5,7 +5,22 @@
     $objfn = new Funcoes();
 
     //Saber qual é a ação Editar e Deletar
-    
+    if(isset($_GET['acao'])){
+
+        switch($_GET['acao']){
+
+           case "edit":  $func = $usuario->selecionaId($_GET['func']);
+             break;
+           case "delet": 
+               if( $usuario->deletarId($_GET['func']) == "ok"){
+                   echo "Deletado com Sucesso";
+                   header("Location:usuario.php");
+               } else{
+                 echo "Não Deletou";
+               }
+             break;
+        } 
+     }
 
 ?>
 
@@ -42,7 +57,10 @@
                         </thead>
                         <tbody>
                         <?php
-                        
+                        try {
+                            $totalUsuarios = $usuario->contarTotalUsuarios();
+                            $totalPaginas = ceil($totalUsuarios / Usuario::REGISTROS_POR_PAGINA);
+                        }
                         ?>
 
                     <?php foreach ($usuario as $resultado): ?>
