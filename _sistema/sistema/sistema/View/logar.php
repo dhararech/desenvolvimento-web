@@ -7,7 +7,11 @@
 </head>
 <body>
     <?php
-       
+       require_once "../../View/autoload.php";
+       $usuario = new usuario();
+       if(isset($_POST["Logar"])){
+        $usuario->logarUsuarios($_POST);
+       }
 
     ?>
 

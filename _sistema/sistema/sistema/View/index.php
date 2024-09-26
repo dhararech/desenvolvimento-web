@@ -6,12 +6,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
+<?php
+session_start();
+require_once "../../View/autoload.php";
+$a = new usuario();
 
-   
-
-<div class="container">
+if($_SESSION["logado"] == "logar"){
+    $a->verificarUsuario($_SESSION["func"]);
+}
+else{
+    header("Location:../View/login.php");
+}
+?>
+  <div class="container">
     <?php require_once "../Includes/menu.php";?>
-    <h2> Olá </h2>
+    <h2> Olá <?php echo $_SESSION["nome"];?></h2>
        
     <?php require_once "../Includes/rodape.php";?>
 </div>

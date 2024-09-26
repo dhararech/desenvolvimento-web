@@ -60,7 +60,13 @@
                         try {
                             $totalUsuarios = $usuario->contarTotalUsuarios();
                             $totalPaginas = ceil($totalUsuarios / Usuario::REGISTROS_POR_PAGINA);
-                        }
+
+                            echo "Debug: Total de usuários no banco: " .$totalUsuarios . "<br>";
+                            echo "Debug: Total de páginas " . $totalPaginas . "<br>";
+
+                            $usuario = $usuario->obterUsuariosPaginados($paginaAtual);
+                            echo "Debug: Total de usuário na página: " .count($usuario) ."<br>";
+                       
                         ?>
 
                     <?php foreach ($usuario as $resultado): ?>
@@ -102,7 +108,10 @@
             </tr>
 
             <?php
-            //fecha cacth
+             } catch(Exception $e)
+             {
+                echo "Erro ao obter usuários paginados: ".$e->getMessage();
+             }
             ?>
 
                         </tbody>

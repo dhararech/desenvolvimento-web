@@ -5,13 +5,44 @@
     $objfn = new Funcoes();
 
     //Cadastrar
-    
+    if(isset($_POST['btCadastrar'])){
+        if($usuario->inserirUsuario($_POST) == "ok"){
+            echo "inserido com sucesso";
+            header("Location: ../View/usuario.php");
+        }else{
+            echo "Não deu";
+        }
+    }
 
     //Editar
-    
+    if(isset($_POST['btAlter'])){
+        if($usuario->editarUsuario($_POST) == "ok"){
+            echo "Editado com sucesso";
+            header("Location: ../View/usuario.php");
+        }else{
+            echo "Não deu";
+        }
+    }
 
     //Saber qual é a ação Editar e Deletar
-    
+    if(isset($_GET['acao'])){
+
+        switch($_GET['acao']){
+            case "edit" : 
+                    $func = $usuario->selecionaId($_GET['func']);
+                break;
+            case "delet" : 
+                if($usuario->deletarId($_GET['func']) == "ok"){
+                    echo "Deletado com Sucesso";
+                    header("Location:../usuario.php");
+                }else{
+                    echo "Não Deletou";
+                }
+                
+                break;
+        }
+
+    }
 
 
 ?>
